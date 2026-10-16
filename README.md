@@ -40,4 +40,4 @@ npm run check
 3. Set `ADMIN_PASSWORD` and `DOCTOR_PASSWORD` in the web service environment before sharing access. Render generates `JWT_SECRET` and configures PostgreSQL SSL.
 4. Wait for the deploy to finish. Check `https://<your-service>.onrender.com/api/health`, then open the service URL and sign in.
 
-The web service runs `npm install && npm run build` and `npm start`. The server listens on `process.env.PORT`, uses `DATABASE_URL`, applies the schema on startup, and serves `dist/` in production. Do not commit `.env` or use the demo passwords on a public deployment.
+The web service runs `npm install --include=dev && npm run build` and `npm start`. The server listens on `process.env.PORT`, uses `DATABASE_URL`, applies the schema on startup, and serves `dist/` in production. Do not commit `.env` or use the demo passwords on a public deployment.
