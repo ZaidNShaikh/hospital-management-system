@@ -1,0 +1,9 @@
+{
+  "name": "harbor-hospital-management",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {"dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"", "server:dev": "node --watch server/index.js", "client:dev": "vite --host 0.0.0.0", "build": "vite build", "start": "node server/index.js", "check": "node --check server/index.js && node --check server/db.js && node --check server/auth.js && npm run build"},
+  "dependencies": {"dotenv": "^16.4.7", "express": "^4.21.2", "jsonwebtoken": "^9.0.2", "pg": "^8.13.1", "react": "^18.3.1", "react-dom": "^18.3.1"},
+  "devDependencies": {"@vitejs/plugin-react": "^4.3.4", "concurrently": "^9.1.2", "vite": "^6.0.5"}
+}

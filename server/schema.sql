@@ -1,0 +1,24 @@
+CREATE TABLE IF NOT EXISTS patients (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  age INTEGER NOT NULL CHECK (age BETWEEN 0 AND 130),
+  gender VARCHAR(30) NOT NULL,
+  phone VARCHAR(30) NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE TABLE IF NOT EXISTS doctors (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  specialization VARCHAR(100) NOT NULL,
+  phone VARCHAR(30) NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE TABLE IF NOT EXISTS appointments (
+  id SERIAL PRIMARY KEY,
+  patient_id INTEGER NOT NULL REFERENCES patients(id) ON DELETE RESTRICT,
+  doctor_id INTEGER NOT NULL REFERENCES doctors(id) ON DELETE RESTRICT,
+  appointment_date TIMESTAMPTZ NOT NULL,
+  status VARCHAR(20) NOT NULL DEFAULT 'Scheduled' CHECK (status IN ('Scheduled', 'Completed', 'Cancelled')),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS appointments_date_idx ON appointments (appointment_date);

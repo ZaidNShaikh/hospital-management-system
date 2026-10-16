@@ -1,0 +1,28 @@
+databases:
+  - name: harbor-hospital-db
+    databaseName: harbor_hospital
+    user: harbor_hospital_user
+    plan: free
+services:
+  - type: web
+    name: harbor-hospital
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: harbor-hospital-db
+          property: connectionString
+      - key: DB_SSL
+        value: "true"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: DOCTOR_PASSWORD
+        sync: false
